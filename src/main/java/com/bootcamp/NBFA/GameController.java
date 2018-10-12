@@ -25,7 +25,7 @@ public class GameController {
     public GameState initialState() {
         GameState currentState = new GameState();
         currentState.board = currentGame.GetMap();
-        currentState.isFinished = currentGame.CheckWin() == 0 ? true : false;
+        currentState.isFinished = currentGame.CheckWin() != -1 ? true : false;
         currentState.winner = currentGame.CheckWin();
         currentState.playerTurn = currentGame.CurrentPlayer();
         return currentState;
@@ -37,7 +37,7 @@ public class GameController {
         currentGame.Move(new Coordinate(i1, j1), new Coordinate(i2, j2));
         GameState currentState = new GameState();
         currentState.board = currentGame.GetMap();
-        currentState.isFinished = currentGame.CheckWin() == 0 ? true : false;
+        currentState.isFinished = currentGame.CheckWin() != -1 ? true : false;
         currentState.winner = currentGame.CheckWin();
         currentState.playerTurn = currentGame.CurrentPlayer();
         return currentState;
