@@ -2,10 +2,10 @@ package com.bootcamp.domain;
 
 import com.bootcamp.domain.Coordinate;
 import com.bootcamp.domain.Player;
+import org.apache.logging.log4j.util.StringBuilders;
 
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
-import java.util.EnumMap;
 import java.util.List;
 
 public class Game {
@@ -29,14 +29,14 @@ public class Game {
 
         for (int x = 0; x < w; ++x)
             for (int y = 0; y < h; ++y)
-                map[x][h] = EmptyCell;
+                map[x][y] = EmptyCell;
 
         map[1][1] = Player1;
         map[w - 2][h - 2] = Player2;
         currentPlayer = Player1;
 
         playerMap = new ArrayList<>();
-        playerMap.add(new InvalidPlayer());
+        playerMap.add(new InvalidPlayer("",0));
         playerMap.add(new Player("Player 1", 1));
         playerMap.add(new Player("Player 2", 1));
         playerMap.get(Player1).spots.add(new Coordinate(1,1));
@@ -62,6 +62,11 @@ public class Game {
     }
 
     private boolean CanMove(@NotNull Coordinate from, @NotNull Coordinate to) {
+        if(to.x < 0 || to.y < 0 || to.x >= map.length || to.y >= map[0].length)
+            return false;
+
+        System.out.println(to.x);
+        System.out.println(to.y);
         if(map[to.x][to.y] != EmptyCell)
             return false;
 
@@ -145,5 +150,20 @@ public class Game {
                     map[x][y] = playerId;
                     ++playerMap.get(playerId).points;
                 }
+    }
+
+    public String toString() {
+        StringBuilder str = new StringBuilder();
+        for (int x = 0; x < 10; ++x){
+            for (int y = 0; y < 10; ++y){
+                if(map[x][y] == -1)
+                    str.append('*');
+                else
+                    str.append(map[x][y]);
+            }
+            str.append("<br>");
+        }
+
+        return str.toString();
     }
 }

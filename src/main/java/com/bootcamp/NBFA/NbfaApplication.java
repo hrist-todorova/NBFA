@@ -1,5 +1,6 @@
 package com.bootcamp.NBFA;
 
+import com.bootcamp.domain.Game;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
