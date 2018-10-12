@@ -65,8 +65,6 @@ public class Game {
         if(to.x < 0 || to.y < 0 || to.x >= map.length || to.y >= map[0].length)
             return false;
 
-        System.out.println(to.x);
-        System.out.println(to.y);
         if(map[to.x][to.y] != EmptyCell)
             return false;
 
